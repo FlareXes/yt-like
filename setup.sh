@@ -8,9 +8,9 @@ sudo cp ./like /usr/local/bin/
 
 sudo cp ./requirements.txt /opt/yt-like/
 
-sudo chmod +x /usr/local/bin/like
-
 sudo chown -R $(whoami):$(whoami) /opt/yt-like/
+
+chmod +x /usr/local/bin/like
 
 cd /opt/yt-like/
 
@@ -22,6 +22,6 @@ pip install -r requirements.txt
 
 deactivate
 
-echo -e "\n\nNOW YOU CAN DELETE THIS REPO\n"
+printf "\n\nNOW YOU CAN DELETE THIS REPO\n"
 
 exit 0
