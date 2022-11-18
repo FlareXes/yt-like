@@ -33,9 +33,11 @@ def _is_access_token_expired(credentials):
     if credentials and credentials.expired and credentials.refresh_token:
         # Refresh token if valid
         print('Refreshing Access Token...')
-        credentials.refresh(Request())
-        return False
-    return True
+        try:
+            credentials.refresh(Request())
+            return False
+        except Exception:
+            return True
 
 
 def _get_new_access_token():
@@ -57,7 +59,6 @@ def _like_video(credentials, _id):
 
 
 def main(args):
-    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
     credentials = _load_credentials()
 
     if not credentials or not credentials.valid:
@@ -66,9 +67,10 @@ def main(args):
             credentials = _get_new_access_token()
 
     _id = args[1].split("?v=")[1]
-
     _like_video(credentials, _id)
 
+    print("\n>>> Liked Successfully <<<")
 
 if __name__ == "__main__":
     main(sys.argv)
+    sys.exit(0)
