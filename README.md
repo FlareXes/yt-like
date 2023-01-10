@@ -29,4 +29,4 @@ sudo rm -rf /opt/yt-like /usr/local/bin/like
 ```
 
 # License
-This work by [FlareXes](https://github.com/FlareXes) is Licensed Under [MIT LICENSE](LICENSE)
+This work by [FlareXes](https://github.com/FlareXes) is Licensed Under [MIT LICENSE](LICENCE)
