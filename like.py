@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
+
 import os
 import pickle
 import sys
 
+from google.auth.exceptions import RefreshError
+from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
-from google.auth.transport.requests import Request
 
 API_SERVICE_NAME = "youtube"
 API_VERSION = "v3"
@@ -30,8 +32,11 @@ def get_credentials():
     credentials = load_credentials()
     if credentials and credentials.expired:
         print('Refreshing Access Token...')
-        credentials.refresh(Request())
-        return credentials
+        try:
+            credentials.refresh(Request())
+            return credentials
+        except RefreshError:
+            print('Fetching New Credentials...')
 
     # if credentials is None or not credentials.valid:
     flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
