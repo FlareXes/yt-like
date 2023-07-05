@@ -64,17 +64,9 @@ if ! python3 -m venv /opt/yt-like/venv; then
   log_echo "Error: Failed to create virtual environment of /opt/yt-like/" "red"
 fi
 
-# Activate python virtual environment and install dependencies
-source /opt/yt-like/venv/bin/activate
-if [ -z "$VIRTUAL_ENV" ]; then
-  log_echo "Error: Failed to activate virtual environment" "red"
-else
-  if ! pip install -r /opt/yt-like/requirements.txt; then
-    log_echo "Error: Failed to install the dependencies" "red"
-  fi
+# Install dependencies
+if ! /opt/yt-like/venv/bin/python3 -m pip install -r /opt/yt-like/requirements.txt; then
+  log_echo "Error: Failed to install the dependencies" "red"
 fi
-
-# Deactivate python virtual environment
-deactivate
 
 log_echo "Now you can delete cloned repository" "green"
