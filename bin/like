@@ -1,9 +1,18 @@
 #!/bin/bash
 
-PWD=$(pwd)
+# change directory /opt/yt-like
+cd /opt/yt-like
 
-cd /opt/yt-like/ || exit
+# Check if /opt/yt-like/ directory does not exist
+if ! [ -d /opt/yt-like/ ]; then
+  echo -e "\033[1;31mError: Offsync not installed.\033[0m" >&2
+  exit 1
+fi
 
-venv/bin/python3 like.py "$@"
+# Check if /opt/yt-like/like.py file does not exist
+if ! [ -f /opt/yt-like/like.py ]; then
+  echo -e "\033[1;31mError: Failed to start yt-like, '/opt/yt-like/like.py' not found.\033[0m" >&2
+  exit 1
+fi
 
-cd "$PWD" || exit
+/opt/yt-like/venv/bin/python3 /opt/yt-like/like.py "$@"
